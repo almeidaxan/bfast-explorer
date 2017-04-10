@@ -1,19 +1,15 @@
-
-
 ## Description
 
-**BFAST Explorer** is an exploratory tool desgined to allow easy and fast 
-time series analysis from *Landsat Surface Reflectance* pixel data. This 
-tool uses *Google Earth Engine (GEE) API* to access remote sensing data and
-perform some preprocessing, such as cloud filtering.
+**BFAST Explorer** is a [Shiny](https://shiny.rstudio.com/) app, developed using R and Python, designed for the analysis of *Landsat Surface Reflectance* time series pixel data.
 
-After the data are downloaded, three change detection algorithms
-(**bfastmonitor**, **bfast01** and **bfast**) can be applied to the time
-series in order to investigate changes in the trend and/or seasonal
-components over time.
+Three change detection algorithms - **bfastmonitor**, **bfast01** and **bfast** - are used in order to investigate temporal changes in trend and seasonal components, via breakpoint detection.
+
+If you encounter any bugs, please send a message to almeida.xan@gmail.com, or create an issue on the [GitHub page](https://github.com/almeidaxan/bfast-explorer/).
+
+## Tutorial
 
 Albeit very simple, please follow this short usage guide to learn how to
-properly use this tool.
+properly use the tool.
 
 ### Map Tab
 
