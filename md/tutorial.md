@@ -140,6 +140,4 @@ in comparison to the previous two algorithms.
 
 ![md](./images/tutorial-14.jpg)
 
-That's it!
-
-If you encounter any bugs, please send a message to almeida.xan@gmail.com, or create an issue on the GitHub page.
+That's all for now. Thank you for taking your time to read this guide.
