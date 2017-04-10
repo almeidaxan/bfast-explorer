@@ -100,14 +100,3 @@ try:
 except ee.ee_exception.EEException:
 	# no data available
 	serie = []
-
-# + \
-# [round(aux[i][6], 4)] + \
-# [round(aux[i][7], 4)] + \
-# [round(aux[i][8], 4)] + \
-# [round(aux[i][9], 4)] + \
-# [round(aux[i][10], 4)] + \
-# [round(aux[i][11], 4)] + \
-# [round(aux[i][12], 4)] + \
-# [round(aux[i][13], 4)] + \
-# [round(aux[i][14], 4)]
