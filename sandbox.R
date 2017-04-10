@@ -1,24 +1,6 @@
-# --------------------------------------------------------------- TODO ----
+# ------------------------------------------------------ TO-DO ADVANCES ----
 
-## BUGS
-# - plot functions are called more than once when input$satPlot suffers a
-# 	change
-
-## IMPROVS
-# - dynamically set 'harmonic order' parameter for bfastmonitor
-# - create an show an 'satellite availability map'
-# - reset plots when new data is downloaded
-# - gray-out Analysis tab before data is downloaded
-# - enable LS8 Band 6 data to be downloaded
-# - generalize all plot functions as one
-# - disable 'day' selection on dateInput, something like this:
-#		http://stackoverflow.com/questions/31152960/display-only-months-in-daterangeinput-or-dateinput-for-a-shiny-app-r-programmin
-# - interface improvements ideas:
-#		https://daattali.com/shiny/ddpcr/
-
-# ------------------------------------------------------ TODO ADVANCES ----
-
-## dynamically set 'harmonic order' parameter for bfastmonitor
+## Dynamically set 'harmonic order' parameter for bfastmonitor
 
 # currently, error occurs when:
 # 	condition: ht = "ROC"; order > 9
