@@ -9,4 +9,4 @@ series in order to investigate changes in the trend and/or seasonal
 components over time.
 
 If you encounter any bugs, please send a message to almeida.xan@gmail.com,
-or create an issue on the GitHub page.
+or create an issue on this page.
