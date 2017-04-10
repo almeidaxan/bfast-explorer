@@ -10,7 +10,7 @@ If you encounter any bugs, please create an issue on this page or send a message
 
 Currently, this tool only supports UNIX-like systems (no Windows OS) due to the integration between R and Python.
 
-In order to successfully run this tool, apart from having R and Python installed, you need the following: 
+In order to successfully run this tool, apart from having a version from R and Python installed, you need the following: 
 
 * Request access to use GEE (https://earthengine.google.com/signup/)
 * Install and set up GEE Python API (https://developers.google.com/earth-engine/python_install)
