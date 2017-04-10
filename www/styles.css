@@ -1,0 +1,74 @@
+/* customize map toolbar style */
+#map-toolbar {
+	padding: 15px 15px 15px 15px;
+	cursor: move;
+	/* fade out while not hovering */
+	opacity: 0.7;
+	transition: opacity 500ms 0s;
+}
+#map-toolbar:hover {
+	/* fade in while hovering */
+	opacity: 0.9;
+	transition-delay: 0;
+}
+
+/* customize leaflet map */
+#map-leaflet {
+	position: fixed;
+	top: 51px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: rgb(0,0,0);
+}
+
+/* change leaflet container background color */
+.leaflet-container {
+	background-color: rgb(0,0,0);
+}
+
+/* define a custom color to highlight text */
+.text-highlight {
+    color: rgb(86,175,56);
+}
+
+.text-heading {
+	margin-top: 0;
+}
+
+/* highlight images in About tab when hovered */
+.image-highlight {
+	border: 0;
+}
+.image-highlight img:hover {
+	opacity: .7;
+}
+
+/* change Shiny error text color to blue and center it */
+.shiny-output-error-validation {
+	color: blue;
+	text-align: center;
+	margin-left: auto;
+    margin-right: auto;
+}
+
+.hidden-n {
+	/* fade out while not hovering */
+	opacity: 0.0;
+	transition: opacity 500ms 0s;
+	cursor: default;
+}
+.hidden-n:hover {
+	/* fade in while hovering */
+	opacity: 1.0;
+	transition-delay: 0;
+}
+
+/* tutorial tab images */
+img[alt="md"] {
+	max-width: 100%;
+	width: auto;
+	height: auto;
+}
