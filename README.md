@@ -4,7 +4,7 @@
 
 After the data is downloaded, three change detection algorithms (**bfastmonitor**, **bfast01** and **bfast**) can be applied to the time series in order to investigate changes in the trend and/or seasonal components over time.
 
-If you encounter any bugs please create an issue on this page or send a message to almeida.xan@gmail.com.
+If you encounter any bugs, please create an issue on this page or send a message to almeida.xan@gmail.com.
 
 ## Usage
 
