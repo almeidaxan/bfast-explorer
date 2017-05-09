@@ -569,4 +569,4 @@ satPar <- function(x) {
 
 # create a .md file from the following .Rmd, in order to be embedded into
 # the Shiny app
-knit(input = "./md/tutorial.Rmd", output = "md/tutorial.md", quiet = T)
+# knit(input = "./md/tutorial.Rmd", output = "md/tutorial.md", quiet = T)
