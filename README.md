@@ -4,7 +4,7 @@
 
 Three change detection algorithms - **bfastmonitor**, **bfast01** and **bfast** - are used in order to investigate temporal changes in trend and seasonal components, via breakpoint detection.
 
-If you encounter any bugs, please create an issue on this page or send a message to almeida.xan@gmail.com.
+If you encounter any bugs, please create an [issue](https://github.com/almeidaxan/bfast-explorer/issues) or send a message to almeida.xan@gmail.com.
 
 ## Usage
 
