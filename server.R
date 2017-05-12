@@ -4,13 +4,17 @@ source("global.R")
 shinyServer(function(input, output, session) {
 # ------------------------------------------------------------- SESSION ----
 
+	# allow reconnection by a certain grace period
 	session$allowReconnect(T)
 
 # ------------------------------------------------------------- SHARED ----
 
 	# reactive values
 	v <- reactiveValues(markerId = 1,
+						# selected marker info
 						markerSel = NULL,
+						# downloaded marker info
+						markerDown = NULL,
 						# defaults view to the center of the atlantic ocean
 						searchLoc = data.frame(lon = viewCenter[1],
 											   lat = viewCenter[2],
@@ -143,6 +147,14 @@ shinyServer(function(input, output, session) {
 		}
 	})
 
+	observeEvent(input$select_showCoords, {
+		if(input$select_showCoords) {
+			v$markerDown$show <- T
+		} else {
+			v$markerDown$show <- F
+		}
+	})
+
 # ----------------------------------------------------- ACTION BUTTONS ----
 
 	# change the state of clearMarkers ab if at least a marker is drawn
@@ -201,6 +213,10 @@ shinyServer(function(input, output, session) {
 				input$select_satGet != "",
 				"Please select a satellite from the list above."
 			))
+
+			# store info about the downloaded marker
+			v$markerDown$lat <- as.numeric(v$markerSel[2])
+			v$markerDown$lon <- as.numeric(v$markerSel[1])
 
 			# assign variable in Python with selected coordinates (lng,lat order)
 			python.assign("coords", as.numeric(v$markerSel[1:2]))
@@ -521,7 +537,16 @@ shinyServer(function(input, output, session) {
 			output$action_downloadDataRaw <- downloadHandler(
 				filename = paste0("be-data-ts", ".csv"),
 				content = {function(file) {
-					write.csv(x = serieSel(), file = file, row.names = F)
+					if(v$markerDown$show) {
+						header <- rep("", ncol(serieSel()))
+						names(header) <- c("LatLong Coordinates", as.character(c(v$markerDown$lat, v$markerDown$lon)), rep("", ncol(serieSel()) - 3))
+						write.table(x = t(header), file = file, sep = ",", row.names = F)
+						options(warn = -1)
+						write.table(x = serieSel(), file = file, sep = ",", row.names = F, append = T)
+						options(warn = 0)
+					} else {
+						write.table(x = serieSel(), file = file, sep = ",", row.names = F)
+					}
 				}}
 			)
 
@@ -532,7 +557,8 @@ shinyServer(function(input, output, session) {
 					xAxisCustom = xAxisCustom,
 					ylimCustom = ylimCustom,
 					ylab = toupper(colnames(serieSel())[matchCol]),
-					seriePar = seriePar
+					seriePar = seriePar,
+					coords = v$markerDown
 				)
 				plotRawLegend(
 					satOrder = satOrder,
@@ -579,7 +605,8 @@ shinyServer(function(input, output, session) {
 				xAxisCustom = xAxisCustom,
 				ylimCustom = ylimCustom,
 				ylab = toupper(colnames(serieSel())[matchCol]),
-				seriePar = seriePar
+				seriePar = seriePar,
+				coords = v$markerDown
 			)
 		})
 

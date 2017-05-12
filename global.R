@@ -104,7 +104,7 @@ ppBfast <- function(x, date, ...) {
 }
 
 # plotting
-plotRaw <- function(serie, matchCol, xAxisCustom, ylimCustom, ylab, seriePar) {
+plotRaw <- function(serie, matchCol, xAxisCustom, ylimCustom, ylab, seriePar, coords) {
 	# placeholder blank plot
 	par(mar = c(4, 4, 0, 0) + 0.1)
 	plot(y = serie[, matchCol],
@@ -161,6 +161,21 @@ plotRaw <- function(serie, matchCol, xAxisCustom, ylimCustom, ylab, seriePar) {
 		pch = as.numeric(seriePar[, 2]),
 		cex = 0.6
 	)
+
+	if(mean(serie[, matchCol]) > (ylimCustom[1] + 0.5 * (diff(ylimCustom)))) {
+		posText <- 0.1
+	} else {
+		posText <- 0.9
+	}
+
+	if(coords$show) {
+		text(
+			x = serie$date %>% year() %>% unique() %>% range() %>% mean() %>% sum(0.5) %>% date_decimal() %>% format("%Y-%m-%d") %>% as.Date(),
+			y = ylimCustom[1] + posText * (diff(ylimCustom)),
+			labels = paste0("LatLong = (", sprintf("%.5f", round(coords$lat, 5)), ", ", sprintf("%.5f", round(coords$lon, 5)), ")"),
+			cex = 1.3
+		)
+	}
 }
 plotRawLegend <- function(satOrder, seriePar) {
 	# placeholder blank plot

@@ -12,5 +12,5 @@ Currently, this tool only supports UNIX-like systems (no Windows OS) due to the 
 
 In order to successfully run this tool, apart from having R and Python installed, you need the following: 
 
-* Request access to use GEE: https://earthengine.google.com/signup/
-* Install and set up GEE Python API: https://developers.google.com/earth-engine/python_install
+* Request access to use GEE (https://earthengine.google.com/signup/)
+* Install and set up GEE Python API (https://developers.google.com/earth-engine/python_install)
