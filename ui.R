@@ -159,6 +159,13 @@ shinyUI(
 							label = "Plot",
 							style = "primary",
 							icon = icon(name = "download", lib = "font-awesome")
+						),
+						# checkbox to show/hide latlong coordinates
+						checkboxInput(
+							inputId = "select_showCoords",
+							label = "Show coordinates?",
+							value = T,
+							width = "100%"
 						)
 					),
 					# time series plot and its legend
