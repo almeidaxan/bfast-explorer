@@ -21,6 +21,7 @@ packs <- c(
 	"lubridate",
 	"markdown",
 	"RColorBrewer",
+	"raster",
 	"rPython",
 	"shiny",
 	"shinyBS",
@@ -585,3 +586,6 @@ satPar <- function(x) {
 # create a .md file from the following .Rmd, in order to be embedded into
 # the Shiny app
 knit(input = "./md/tutorial.Rmd", output = "md/tutorial.md", quiet = T)
+
+# longlat projection default CRS
+proj_ll <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
