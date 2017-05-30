@@ -45,25 +45,6 @@ shinyServer(function(input, output, session) {
 		m
 	})
 
-	# update v$searchLoc with map search query
-	observeEvent(input$select_search, {
-		# evaluate geocode, but suppress messages and warnings
-		options(warn = -1)
-		gc <- suppressMessages(geocode(input$select_search))
-		options(warn = 0)
-		if (is.na(gc$lon)) {
-			# defaults view to the center of the atlantic ocean
-			v$searchLoc$lon <- viewCenter[1]
-			v$searchLoc$lat <- viewCenter[2]
-			v$searchLoc$zoom <- viewCenter[3]
-		} else {
-			# if user-selected region exists, center on it
-			v$searchLoc$lon <- gc$lon
-			v$searchLoc$lat <- gc$lat
-			v$searchLoc$zoom <- 16
-		}
-	})
-
 	# update map view with v$searchLoc coordinates
 	observeEvent(v$searchLoc, {
 		leafletProxy("leaf") %>%
@@ -71,6 +52,30 @@ shinyServer(function(input, output, session) {
 				lng = v$searchLoc$lon,
 				lat = v$searchLoc$lat,
 				zoom = v$searchLoc$zoom
+			)
+	})
+
+	# update map with input shapefile
+	observeEvent(input$file_insertShape, {
+		inFile <- input$file_insertShape
+		inFolder <- substr(inFile$datapath, 1, nchar(inFile$datapath) - 1)
+		file.rename(inFile$datapath, paste0(inFile$datapath, ".zip"))
+		unzip(paste0(inFile$datapath, ".zip"), exdir = inFolder)
+		shp <- shapefile(paste0(inFolder, "/", substr(inFile$name, 1, nchar(inFile$name) - 4), ".shp"))
+		shp <- spTransform(shp, proj_ll)
+		leafletProxy("leaf") %>%
+			clearShapes() %>%
+			addPolylines(
+				data = shp,
+				weight = 4,
+				opacity = 0.9,
+				color = rgb(1, 1, 0)
+			) %>%
+			fitBounds(
+				lng1 = extent(shp)[1],
+				lng2 = extent(shp)[2],
+				lat1 = extent(shp)[3],
+				lat2 = extent(shp)[4]
 			)
 	})
 
@@ -156,6 +161,25 @@ shinyServer(function(input, output, session) {
 	})
 
 # ----------------------------------------------------- ACTION BUTTONS ----
+
+	# update v$searchLoc with map search query
+	observeEvent(input$action_search, {
+		# evaluate geocode, but suppress messages and warnings
+		options(warn = -1)
+		gc <- suppressMessages(geocode(input$select_search))
+		options(warn = 0)
+		if (is.na(gc$lon)) {
+			# defaults view to the center of the atlantic ocean
+			v$searchLoc$lon <- viewCenter[1]
+			v$searchLoc$lat <- viewCenter[2]
+			v$searchLoc$zoom <- viewCenter[3]
+		} else {
+			# if user-selected region exists, center on it
+			v$searchLoc$lon <- gc$lon
+			v$searchLoc$lat <- gc$lat
+			v$searchLoc$zoom <- 16
+		}
+	})
 
 	# change the state of clearMarkers ab if at least a marker is drawn
 	observeEvent(v$markerId, {

@@ -8,6 +8,8 @@ shinyUI(
 		),
 		windowTitle = "BFAST Explorer",
 		id = "navbar",
+		position = "fixed-top",
+		collapsible = T,
 		header = {
 			# load styles.css file with custom styles
 			tags$head(includeCSS("www/styles.css"))
@@ -38,16 +40,57 @@ shinyUI(
 					# map search query
 					fluidRow(
 						column(
-							12,
-							textInput(
-								inputId = "select_search",
-								label = NULL,
-								width = "100%",
-								placeholder = "Search for a location..."
+							4,
+							HTML('
+							<div class="form-group shiny-input-container" style="width: 100%;">
+								<div class="input-group">
+									<label class="input-group-btn">
+										<button id="action_search" style="width: 100%;" type="button" class="btn action-button btn-primary">
+											<i class="fa fa-search"></i>
+										</button>
+									</label>
+									<input id="select_search" type="text" class="form-control" value="" placeholder="Search for a location..."/>
+								</div>
+							</div>
+							'),
+							# enable "Enter" key press on textInput to activate the search button
+							tags$script('
+								$(document).on("keyup", function (e) {
+									if (e.keyCode == 13) {
+										$("#action_search").click();
+									}
+								});
+							')
+						),
+						# 'insert shape' button
+						column(
+							4,
+							div(
+								HTML('
+								<div class="form-group shiny-input-container" style="width: 100%;">
+									<div class="input-group">
+										<label id="help_insertShape" class="input-group-btn">
+											<span class="btn btn-primary btn-file">
+												<i class="fa fa-upload"></i>
+												<input id="file_insertShape" name="file_insertShape" type="file" style="display: none;" accept="application/octet-stream,application/zip,.zip"/>
+											</span>
+										</label>
+										<input type="text" class="form-control" placeholder="Upload a shapefile..." readonly="readonly"/>
+									</div>
+									<div id="file_insertShape_progress" class="progress progress-striped active shiny-file-input-progress">
+										<div class="progress-bar"></div>
+									</div>
+								</div>
+								'),
+								bsTooltip(
+									id = "help_insertShape",
+									title = '<div align="justify"><p>The shape must be compressed into a zip with, at least, the <strong>.shp</strong>, <strong>.shx</strong>, <strong>.dbf</strong>, and <strong>.prj</strong> files.</p> The zip file <strong>must</strong> have the same name as its contents.</div>',
+									placement = "bottom",
+									trigger = "hover",
+									options = list(container = "body")
+								)
 							)
-						)
-					),
-					fluidRow(
+						),
 						# 'clear all markers' button
 						column(
 							4,
@@ -58,10 +101,12 @@ shinyUI(
 								icon = icon(name = "trash", lib = "font-awesome"),
 								width = "100%"
 							)
-						),
+						)
+					),
+					fluidRow(
 						# select which satellite products to download
 						column(
-							4,
+							6,
 							selectInput(
 								inputId = "select_satGet",
 								label = NULL,
@@ -72,11 +117,11 @@ shinyUI(
 						),
 						# 'get data' button
 						column(
-							4,
+							6,
 							bsButton(
 								inputId = "action_getTs",
 								label = "Get Data",
-								style = "primary",
+								style = "success",
 								icon = icon(name = "download", lib = "font-awesome"),
 								width = "100%"
 							),
@@ -102,10 +147,10 @@ shinyUI(
 			title = "Analysis",
 			icon = icon(name = "bar-chart", lib = "font-awesome", class = "fa-lg"),
 			fluidPage(
-
 				# ----------------------------------------- TIME SERIES ---
 
 				fixedRow(
+					style = "margin-top: 71px;",
 					column(
 						3,
 						h3(class = "text-heading", "Visualization"),
@@ -421,7 +466,7 @@ shinyUI(
 			title = "Tutorial",
 			icon = icon(name = "question-circle", lib = "font-awesome", class = "fa-lg"),
 			fluidPage(
-				div(style = "max-width: 70%; margin-left: auto; margin-right: auto;",
+				div(style = "max-width: 70%; margin-left: auto; margin-right: auto; margin-top: 71px;",
 					align = "justify",
 					includeMarkdown("./md/tutorial.md")
 				)
@@ -435,35 +480,39 @@ shinyUI(
 			icon = icon(name = "info-circle", lib = "font-awesome", class = "fa-lg"),
 			fluidPage(
 				div(
-					style = "margin-left: auto; margin-right: auto; width: 600px;",
-					h3(class = "text-heading", "About"),
-					p(),
-					div(
-						align = "center",
-						div(class = "image-highlight", a(img(src = "logo-tribes.png", height = "80px"), href = "http://www.e-tribes.com.br", target = "_blank")),
+					style = "margin-left: auto; margin-right: auto; margin-top: 71px; width: 600px;",
+						div(
+							align = "center",
+							HTML('<h1><strong><em>BFAST Explorer</em></strong> <br> <small class = text-highlight>v0.0.3</small></h1>')
+						),
+					hr(),
+						HTML('<h3 class="text-heading"> <i class="fa fa-users"></i> Authors</h3>'),
 						p(),
-						div(class = "image-highlight", a(img(src = "logo-unicamp.svg", height = "80px"), href = "http://www.unicamp.br/unicamp/english/", target = "_blank")),
-						div(class = "image-highlight", a(img(src = "logo-wur.png", height = "120px"), href = "http://www.wur.nl/en.htm", target = "_blank"))
-					),
-					p(),
-					HTML('This work is a product of the Tribes project, developed within the University of Campinas (UNICAMP) <a href="http://www.ic.unicamp.br/en" target="_blank">Institute of Computing</a> and the Wageningen University &amp; Research (WUR) <a href="http://www.wur.nl/en/Expertise-Services/Chair-groups/Environmental-Sciences/Laboratory-of-Geo-information-Science-and-Remote-Sensing.htm" target="_blank">Laboratory of Geo-information Science and Remote Sensing</a>.'),
+						div("Alexandre Esteves Almeida", a(icon("user", lib = "font-awesome"), href = "https://buscatextual.cnpq.br/buscatextual/visualizacv.do?id=K4672382A6", target = "_blank"), a(icon("envelope", lib = "font-awesome"), href = "mailto:almeida.xan@gmail.com")),
+						div("Prof. Dr. Jan Verbesselt", a(icon("user", lib = "font-awesome"), href = "https://www.wur.nl/en/Persons/Jan-Verbesselt.htm", target = "_blank")),
+						div("Prof. Dr. Ricardo da Silva Torres", a(icon("user", lib = "font-awesome"), href = "http://buscatextual.cnpq.br/buscatextual/visualizacv.do?id=K4769295A9", target = "_blank")),
+						hr(),
+						HTML('<h3 class="text-heading"> <i class="fa fa-university"></i> Development</h3>'),
+						p(),
+						div(
+							align = "center",
+							div(class = "image-highlight", a(img(src = "logo-tribes.png", height = "80px"), href = "http://www.e-tribes.com.br", target = "_blank")),
+							p(),
+							div(class = "image-highlight", a(img(src = "logo-unicamp.svg", height = "80px"), href = "http://www.unicamp.br/unicamp/english/", target = "_blank")),
+							div(class = "image-highlight", a(img(src = "logo-wur.png", height = "120px"), href = "http://www.wur.nl/en.htm", target = "_blank"))
+						),
+						p(),
+						HTML('This work is a product of the Tribes project, developed within the University of Campinas (UNICAMP) <a href="http://www.ic.unicamp.br/en" target="_blank">Institute of Computing</a> and the Wageningen University &amp; Research (WUR) <a href="http://www.wur.nl/en/Expertise-Services/Chair-groups/Environmental-Sciences/Laboratory-of-Geo-information-Science-and-Remote-Sensing.htm" target="_blank">Laboratory of Geo-information Science and Remote Sensing</a>.'),
 					hr(),
-					h3(class = "text-heading", "Authors"),
-					p(),
-					HTML('Alexandre Esteves Almeida<br>Prof. Dr. Jan Verbesselt<br>Prof. Dr. Ricardo da Silva Torres'),
-					p(),
-					span("Mail:"),
-					a("almeida.xan@gmail.com"),
-					hr(),
-					h3(class = "text-heading", "Supported by"),
-					p(),
-					div(align = "center",
-						div(class = "image-highlight", a(img(src = "logo-fapesp.svg", height = "40px"), href = "http://www.fapesp.br/en/", target = "_blank")),
-						div(style = "display:inline;", HTML("&nbsp&nbsp")),
-						div(class = "image-highlight", a(img(src = "logo-ms-research.png", height = "40px"), href = "http://www.fapesp.br/en/5392", target = "_blank")),
-						div(style = "display:inline;", HTML("&nbsp&nbsp")),
-						div(class = "image-highlight", a(img(src = "logo-cnpq.svg", height = "60px"), href = "http://cnpq.br/", target = "_blank"))
-					)
+					HTML('<h3 class="text-heading"> <i class="fa fa-handshake-o"></i> Supporters</h3>'),
+						p(),
+						div(align = "center",
+							div(class = "image-highlight", a(img(src = "logo-fapesp.svg", height = "40px"), href = "http://www.fapesp.br/en/", target = "_blank")),
+							div(style = "display:inline;", HTML("&nbsp&nbsp")),
+							div(class = "image-highlight", a(img(src = "logo-ms-research.png", height = "40px"), href = "http://www.fapesp.br/en/5392", target = "_blank")),
+							div(style = "display:inline;", HTML("&nbsp&nbsp")),
+							div(class = "image-highlight", a(img(src = "logo-cnpq.svg", height = "60px"), href = "http://cnpq.br/", target = "_blank"))
+						)
 				),
 				HTML('
 					<span class="fa-stack hidden-n" style="position: absolute; left: 1px;">

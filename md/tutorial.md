@@ -1,5 +1,9 @@
 
 
+*This tutorial comprehends the BFAST Explorer v0.0.1. Notice that if you are using a newer version, some features might be different.*
+
+***
+
 ## Description
 
 **BFAST Explorer** is a [Shiny](https://shiny.rstudio.com/) app, developed using R and Python, designed for the analysis of *Landsat Surface Reflectance* time series pixel data.
@@ -13,7 +17,7 @@ If you encounter any bugs, please send a message to almeida.xan@gmail.com, or cr
 Albeit very simple, please follow this short usage guide to learn how to
 properly use the tool.
 
-### Map Tab
+### Map Tab <i class="fa fa-map-marker"></i>
 
 This is the starting tab, which we first see when we run the tool. The 
 tab is composed of an interactive map (rendered using Google Maps engine)
@@ -69,7 +73,7 @@ do yet. We're sorry for that. </small>
 If the download is successful, we'll receive a message directing to the
 **<i class='fa fa-bar-chart'></i> Analysis** tab.
 
-### Analysis Tab
+### Analysis Tab <i class="fa fa-bar-chart"></i>
 
 In this tab, we can analyze the downloaded data and, then,
 locally save the results as files.
@@ -141,5 +145,3 @@ detect multiple breakpoints, it may take a couple of seconds to process,
 in comparison to the previous two algorithms.
 
 ![md](./images/tutorial-14.jpg)
-
-That's all for now. Thank you for taking your time to read this guide.
