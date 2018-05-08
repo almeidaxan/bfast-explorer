@@ -1,5 +1,7 @@
 # --------------------------------------------------------------- LIBS ----
 
+options(shiny.sanitize.errors = FALSE)
+
 # this tool is still not compatible with Windows OS
 if(Sys.info()[["sysname"]] == "Windows") {
 	stop("This tool is not yet compatible with Windows.\nPlease use a UNIX-like system.")
