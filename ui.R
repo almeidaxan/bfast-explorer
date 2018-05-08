@@ -1,5 +1,8 @@
 library(shiny)
 
+options(stringsAsFactors=FALSE)
+options(shiny.launch.browser=T)
+
 shinyUI(
 	navbarPage(
 		title = div(
@@ -37,6 +40,7 @@ shinyUI(
 					bottom = "auto",
 					right = 250,
 					left = 250,
+					style="z-index:500;",
 					# map search query
 					fluidRow(
 						column(
