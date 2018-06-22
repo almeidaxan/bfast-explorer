@@ -58,10 +58,10 @@ shinyServer(function(input, output, session) {
 	# update map with input shapefile
 	observeEvent(input$file_insertShape, {
 		inFile <- input$file_insertShape
-		inFolder <- substr(inFile$datapath, 1, nchar(inFile$datapath) - 1)
-		file.rename(inFile$datapath, paste0(inFile$datapath, ".zip"))
-		unzip(paste0(inFile$datapath, ".zip"), exdir = inFolder)
-		shp <- shapefile(paste0(inFolder, "/", substr(inFile$name, 1, nchar(inFile$name) - 4), ".shp"))
+		inFolder <- substr(inFile$datapath, 1, nchar(inFile$datapath) - 5)
+		unzip(inFile$datapath, exdir = inFolder)
+		shpPath <- paste0(substr(inFile$name, 1, tools::file_path_sans_ext(inFile$name) %>% nchar), ".shp")
+		shp <- shapefile(file.path(inFolder, shpPath))
 		shp <- spTransform(shp, proj_ll)
 		leafletProxy("leaf") %>%
 			clearShapes() %>%

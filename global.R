@@ -22,6 +22,7 @@ packs <- c(
 	"leaflet",
 	"lubridate",
 	"markdown",
+	"magrittr",
 	"RColorBrewer",
 	"raster",
 	"rPython",
@@ -29,6 +30,7 @@ packs <- c(
 	"shinyBS",
 	"shinyjs",
 	"strucchange",
+	"tools",
 	"zoo"
 )
 

@@ -4,6 +4,8 @@
 	cursor: move;
 	/* fade out while not hovering */
 	opacity: 0.7;
+	/* make sure that the toolbar is high enough to be above the Leaflet map */
+	z-index: 500;
 	transition: opacity 500ms 0s;
 }
 #map-toolbar:hover {
