@@ -567,9 +567,9 @@ iconSet <- awesomeIconList(
 # define all available satellites the user can choose from:
 # LHS is the alias name; RHS is the name that GEE understands
 satChoices <- c(
-	"Landsat 5 SR" = "LT5_SR",
-	"Landsat 7 SR" = "LE7_SR",
-	"Landsat 8 SR" = "LC8_SR"
+	"Landsat 5 SR" = "LT05/C01/T1_SR",
+	"Landsat 7 SR" = "LE07/C01/T1_SR",
+	"Landsat 8 SR" = "LC08/C01/T1_SR"
 )
 
 # coordinates (long, lat, zoom) of the default fixed center
@@ -581,9 +581,9 @@ satPar <- function(x) {
 	switch(
 		x,
 
-		"LT5_SR" = c(customPalette[1], 15),
-		"LE7_SR" = c(customPalette[2], 16),
-		"LC8_SR" = c(customPalette[3], 17),
+		"LT05/C01/T1_SR" = c(customPalette[1], 15),
+		"LE07/C01/T1_SR" = c(customPalette[2], 16),
+		"LC08/C01/T1_SR" = c(customPalette[3], 17),
 		"Mixed" = c(customPalette[4], 18)
 	)
 }
