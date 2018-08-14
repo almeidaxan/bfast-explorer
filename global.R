@@ -302,7 +302,7 @@ plotBfm <- function(serie, matchCol, bfmOut, xAxisCustom, ylimCustom, ylab) {
 		   lwd = 1.2)
 
 	# draw line of time of detected break (if it exists)
-	if(is.na(!bfmOut$mefp$breakpoint)) {
+	if(is.na(bfmOut$mefp$breakpoint)==FALSE) {
 		abline(v = serie$date[c(which(condHist), which(condMoni))[bfmOut$mefp$breakpoint]-1],
 			   lty = 2,
 			   lwd = 2,
