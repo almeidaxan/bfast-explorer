@@ -21,14 +21,7 @@ class FileCredentials(OAuth2Credentials):
   def __str__(self):
     return 'FileCredentials(' + self.access_token_file + ')'
 
-
-# earth engine API init
-access_token_file = os.getenv("HOME") + '/.google-access-token'
-if os.path.exists(access_token_file):
-  ee.Initialize(FileCredentials(access_token_file))
-else:
-  ee.Initialize()
-
+ee.Initialize()
 
 # convert Julian day to YYYY-MM-DD date
 def julianDayToDate(s):
