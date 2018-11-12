@@ -6,7 +6,7 @@
 
 Three change detection algorithms - **bfastmonitor**, **bfast01** and **bfast** - are used in order to investigate temporal changes in trend and seasonal components, via breakpoint detection.
 
-If you encounter any bugs, please create an [issue](https://github.com/almeidaxan/bfast-explorer/issues) or send a message to almeida.xan@gmail.com and/or nathmenini@gmail.com.
+If you encounter any bugs, please create an [issue](https://github.com/almeidaxan/bfast-explorer/issues).
 
 ## Usage
 
@@ -23,7 +23,7 @@ To cite BFAST Explorer in publications, please use
 
 > Alexandre Almeida, Nathalia Menini, Jan Verbesselt, Ricardo Torres (2018). BFAST Explorer: An Effective Tool for Time Series Analysis. In: 2018 IEEE International Geoscience and Remote Sensing Symposium (IGARSS). 22-27 July 2018. Valencia, Spain. DOI: 10.1109/IGARSS.2018.8517877.
 
-Or, alternatively, the corresponding BibTeX entry
+or, alternatively, the corresponding BibTeX entry
 
 ```
 @inproceedings{,
