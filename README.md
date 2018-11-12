@@ -16,3 +16,22 @@ In order to successfully run this tool, apart from having R and Python installed
 
 * Request access to use GEE (https://earthengine.google.com/signup/)
 * Install and set up GEE Python API (https://developers.google.com/earth-engine/python_install)
+
+## Citation
+
+To cite BFAST Explorer in publications, please use:
+
+> Alexandre Almeida, Nathalia Menini, Jan Verbesselt, Ricardo Torres (2018). BFAST Explorer: An Effective Tool for Time Series Analysis. In: 2018 IEEE International Geoscience and Remote Sensing Symposium (IGARSS). 22-27 July 2018. Valencia, Spain. DOI: 10.1109/IGARSS.2018.8517877.
+
+Or, alternatively, the corresponding BibTeX entry
+
+```
+@inproceedings{,
+   author = {Alexandre Almeida and Nathalia Menini and Jan Verbesselt and Ricardo Torres},
+   title = {BFAST Explorer: An Effective Tool for Time Series Analysis},
+   booktitle = {2018 IEEE International Geoscience and Remote Sensing Symposium (IGARSS)},
+   location = {Valencia, Spain},
+   eventdate = {2018-07-22/2018-07-27},
+   doi = {10.1109/IGARSS.2018.8517877}
+}
+```
