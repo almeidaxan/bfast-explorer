@@ -167,7 +167,8 @@ plotRaw <- function(serie, matchCol, xAxisCustom, ylimCustom, ylab, seriePar, co
 		cex = 0.6
 	)
 
-	if(mean(serie[, matchCol]) > (ylimCustom[1] + 0.5 * (diff(ylimCustom)))) {
+	# if(mean(serie[, matchCol]) > (ylimCustom[1] + 0.5 * (diff(ylimCustom))))
+	if(mean(serie[, matchCol], na.rm = TRUE) > (ylimCustom[1] + 0.5 * (diff(ylimCustom)))) {
 		posText <- 0.1
 	} else {
 		posText <- 0.9
@@ -566,25 +567,40 @@ iconSet <- awesomeIconList(
 
 # define all available satellites the user can choose from:
 # LHS is the alias name; RHS is the name that GEE understands
+# satChoices <- c(
+# 	"Landsat 5 SR" = "LT5_SR",
+# 	"Landsat 7 SR" = "LE7_SR",
+# 	"Landsat 8 SR" = "LC8_SR"
+# )
 satChoices <- c(
-	"Landsat 5 SR" = "LT5_SR",
-	"Landsat 7 SR" = "LE7_SR",
-	"Landsat 8 SR" = "LC8_SR"
+  "Landsat 5 SR" = "LT05/C01/T1_SR",
+  "Landsat 7 SR" = "LE07/C01/T1_SR",
+  "Landsat 8 SR" = "LC08/C01/T1_SR"
 )
 
 # coordinates (long, lat, zoom) of the default fixed center
 viewCenter <- c(-5.98, 24.69, 3)
 
 # defining colors & pch for points from differente satellite sources
+# satPar <- function(x) {
+# 	customPalette <- brewer.pal(length(satChoices) + 1, "Dark2")
+# 	switch(
+# 		x,
+# 		"LT5_SR" = c(customPalette[1], 15),
+# 		"LE7_SR" = c(customPalette[2], 16),
+# 		"LC8_SR" = c(customPalette[3], 17),
+# 		"Mixed" = c(customPalette[4], 18)
+# 	)
+# }
 satPar <- function(x) {
-	customPalette <- brewer.pal(length(satChoices) + 1, "Dark2")
-	switch(
-		x,
-		"LT5_SR" = c(customPalette[1], 15),
-		"LE7_SR" = c(customPalette[2], 16),
-		"LC8_SR" = c(customPalette[3], 17),
-		"Mixed" = c(customPalette[4], 18)
-	)
+  customPalette <- brewer.pal(length(satChoices) + 1, "Dark2")
+  switch(
+    x,
+    "LT05/C01/T1_SR" = c(customPalette[1], 15),
+    "LE07/C01/T1_SR" = c(customPalette[2], 16),
+    "LC08/C01/T1_SR" = c(customPalette[3], 17),
+    "Mixed" = c(customPalette[4], 18)
+  )
 }
 
 # create a .md file from the following .Rmd, in order to be embedded into

@@ -252,8 +252,9 @@ shinyServer(function(input, output, session) {
 				python.assign("satChoice", input$select_satGet[i])
 
 				# execute Python download script
-				python.load(paste0(getwd(), "/python/gee-px-ls.py"))
-
+				# python.load(paste0(getwd(), "/python/gee-px-ls.py"))
+			  python.load(paste0(getwd(), "/python/gee-px-ls-new.py"))
+				
 				# update progress
 				incProgress(amount = 1 / length(input$select_satGet))
 
@@ -306,7 +307,8 @@ shinyServer(function(input, output, session) {
 				colnames(tmp) <- python.get("colNames")
 
 				# exclude saturated data
-				filterWhich <- which(rowSums(tmp[, 2:ncol(tmp)] == 2) > 0)
+				# filterWhich <- which(rowSums(tmp[, 2:ncol(tmp)] == 2) > 0)
+				filterWhich <- which(rowSums(tmp[, 2:ncol(tmp)] == 2, na.rm = TRUE) > 0)
 				if (length(filterWhich) > 0) {
 					tmp <- tmp[-filterWhich, ]
 				}
@@ -423,6 +425,9 @@ shinyServer(function(input, output, session) {
 		# sort data by date
 		serie <- serie[order(serie$date), ]
 
+		# removendo NAs		
+		serie <- na.omit(serie)
+		
 		# remove leap year additional day (29th Feb), if it exists
 		leapDay <- grep("-02-29", serie$date)
 		if(length(leapDay) > 0) {
@@ -466,10 +471,17 @@ shinyServer(function(input, output, session) {
 
 		# custom ylim parameter
 		ylimCustom <- c(0, 1)
-		if (sum(serieSel()[, matchCol] < 0) > 0) {
+		# if (sum(serieSel()[, matchCol] < 0) > 0) {
+		# 	ylimCustom[1] <- -1
+		# }
+		# if (sum(serieSel()[, matchCol] > 1) > 0) {
+		# 	ylimCustom[2] <- 1.5
+		# }
+		
+		if (sum(serieSel()[, matchCol] < 0, na.rm = TRUE) > 0) {
 			ylimCustom[1] <- -1
 		}
-		if (sum(serieSel()[, matchCol] > 1) > 0) {
+		if (sum(serieSel()[, matchCol] > 1, na.rm = TRUE) > 0) {
 			ylimCustom[2] <- 1.5
 		}
 
