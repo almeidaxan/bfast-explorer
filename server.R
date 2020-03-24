@@ -243,23 +243,25 @@ shinyServer(function(input, output, session) {
 			v$markerDown$lon <- as.numeric(v$markerSel[1])
 
 			# assign variable in Python with selected coordinates (lng,lat order)
-			python.assign("coords", as.numeric(v$markerSel[1:2]))
-
+			coords <- as.numeric(v$markerSel[1:2])
+			LON <<- coords[1]
+			LAT <<- coords[2]
+			
 			# call Python download script for each selected satellite
 			serieList <- list()
 			for(i in 1:length(input$select_satGet)) {
 				# assign Python variables using Shiny inputs
-				python.assign("satChoice", input$select_satGet[i])
+			  satChoice <<- input$select_satGet[i]
 
 				# execute Python download script
-				# python.load(paste0(getwd(), "/python/gee-px-ls.py"))
-			  python.load(paste0(getwd(), "/python/gee-px-ls-new.py"))
-				
+				py_run_file(paste0(getwd(), "/python/gee-px-ls-reticulate.py"))
+			
 				# update progress
 				incProgress(amount = 1 / length(input$select_satGet))
 
 				# get Python output and show download message
-				if (is.null(unlist(python.get("serie")))) {
+				serie <- py$serie
+				if (is.null(unlist(serie))) {
 					showNotification(
 						ui = paste(names(satChoices[satChoices == input$select_satGet[i]]),
 								   "- no data available."),
@@ -276,7 +278,8 @@ shinyServer(function(input, output, session) {
 						duration = 4,
 						closeButton = F
 					)
-					serieList[[i]] <- unlist(python.get("serie"))
+					#serieList[[i]] <- unlist(python.get("serie"))
+				  serieList[[i]] <- unlist(serie)
 				}
 			}
 
@@ -296,7 +299,8 @@ shinyServer(function(input, output, session) {
 			# arrange each list element form serieList as a df
 			serie <- lapply(serieList, function(x) {
 				tmp <- data.frame(matrix(x,
-										 ncol = python.get("numCol"),
+										 #ncol = python.get("numCol"),
+										 ncol = py$numCol,
 										 byrow = T))
 
 				# format data type and columns names
@@ -304,11 +308,11 @@ shinyServer(function(input, output, session) {
 				tmp[, 2:ncol(tmp)] <- apply(tmp[, 2:ncol(tmp)],
 											MARGIN = 2,
 											as.numeric)
-				colnames(tmp) <- python.get("colNames")
+				#colnames(tmp) <- python.get("colNames")
+				colnames(tmp) <- py$colNames
 
 				# exclude saturated data
-				# filterWhich <- which(rowSums(tmp[, 2:ncol(tmp)] == 2) > 0)
-				filterWhich <- which(rowSums(tmp[, 2:ncol(tmp)] == 2, na.rm = TRUE) > 0)
+				filterWhich <- which(rowSums(tmp[, 2:ncol(tmp)] == 2) > 0)
 				if (length(filterWhich) > 0) {
 					tmp <- tmp[-filterWhich, ]
 				}
@@ -335,14 +339,15 @@ shinyServer(function(input, output, session) {
 			updateSelectInput(
 				session = session,
 				inputId = "select_index",
-				choices = python.get("colNames")[-1]
+				#choices = python.get("colNames")[-1]
+				choices = py$colNames[-1]
 			)
 
-			python.assign("aux", NULL)
-			python.assign("serie", NULL)
-			python.assign("values", NULL)
-			python.assign("numCol", NULL)
-			python.assign("colNames", NULL)
+			py$aux <- NULL
+			py$serie <- NULL
+			py$values <- NULL
+			py$numCol <- NULL
+			py$colNames <- NULL
 
 			return(serie)
 		})
@@ -425,9 +430,6 @@ shinyServer(function(input, output, session) {
 		# sort data by date
 		serie <- serie[order(serie$date), ]
 
-		# removendo NAs		
-		serie <- na.omit(serie)
-		
 		# remove leap year additional day (29th Feb), if it exists
 		leapDay <- grep("-02-29", serie$date)
 		if(length(leapDay) > 0) {
@@ -471,17 +473,10 @@ shinyServer(function(input, output, session) {
 
 		# custom ylim parameter
 		ylimCustom <- c(0, 1)
-		# if (sum(serieSel()[, matchCol] < 0) > 0) {
-		# 	ylimCustom[1] <- -1
-		# }
-		# if (sum(serieSel()[, matchCol] > 1) > 0) {
-		# 	ylimCustom[2] <- 1.5
-		# }
-		
-		if (sum(serieSel()[, matchCol] < 0, na.rm = TRUE) > 0) {
+		if (sum(serieSel()[, matchCol] < 0) > 0) {
 			ylimCustom[1] <- -1
 		}
-		if (sum(serieSel()[, matchCol] > 1, na.rm = TRUE) > 0) {
+		if (sum(serieSel()[, matchCol] > 1) > 0) {
 			ylimCustom[2] <- 1.5
 		}
 
