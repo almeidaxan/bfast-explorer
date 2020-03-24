@@ -1,7 +1,6 @@
 import ee
 import numpy
 import os
-import rpy2.robjects as robjects
 from datetime import datetime
 from oauth2client.client import OAuth2Credentials
 
