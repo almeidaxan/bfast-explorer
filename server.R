@@ -166,7 +166,10 @@ shinyServer(function(input, output, session) {
 	observeEvent(input$action_search, {
 		# evaluate geocode, but suppress messages and warnings
 		options(warn = -1)
-		gc <- suppressMessages(geocode(input$select_search))
+		#gc <- suppressMessages(geocode(input$select_search))
+	  gc <- strsplit(input$select_search, ",")
+		gc$lon <- gc[[1]][1]
+		gc$lat <- gc[[1]][2]
 		options(warn = 0)
 		if (is.na(gc$lon)) {
 			# defaults view to the center of the atlantic ocean
@@ -177,7 +180,7 @@ shinyServer(function(input, output, session) {
 			# if user-selected region exists, center on it
 			v$searchLoc$lon <- gc$lon
 			v$searchLoc$lat <- gc$lat
-			v$searchLoc$zoom <- 16
+			v$searchLoc$zoom <- 19
 		}
 	})
 
