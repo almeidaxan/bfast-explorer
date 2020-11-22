@@ -15,6 +15,7 @@ if(!require("pacman")) {
 
 # CRAN
 packs <- c(
+   "bfast",
 	"devtools",
 	"dplyr",
 	"ggmap",
@@ -34,13 +35,7 @@ packs <- c(
 	"zoo"
 )
 
-# GitHub
-packs_gh <- c(
-	"verbe039/bfast"
-)
-
 p_load(char = packs)
-p_load_gh(char = packs_gh)
 
 # ---------------------------------------------------------- FUNCTIONS ----
 
