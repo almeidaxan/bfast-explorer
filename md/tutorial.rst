@@ -119,6 +119,10 @@ detect multiple breakpoints, it may take a couple of seconds to process, in comp
 
 .. thumbnail:: https://raw.githubusercontent.com/almeidaxan/bfast-explorer/master/md/images/tutorial-14.jpg
   :group: bfast-explorer
+  
+.. |chart-icon| raw:: html
+
+    <i class='fa fa-chart-bar'></i>
 
 .. |trash-icon| raw:: html
 
@@ -127,7 +131,3 @@ detect multiple breakpoints, it may take a couple of seconds to process, in comp
 .. |download-icon| raw:: html 
 
     <i class="fa fa-download"></i>
-   
-.. [chart-icon| raw:: html
-
-    <i class='fa fa-chart-bar'></i>
