@@ -122,7 +122,7 @@ detect multiple breakpoints, it may take a couple of seconds to process, in comp
   
 .. |chart-icon| raw:: html
 
-    <i class='fa fa-chart-bar'></i>
+    <i class="fa fa-chart-bar"></i>
 
 .. |trash-icon| raw:: html
 
