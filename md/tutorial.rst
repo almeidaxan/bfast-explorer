@@ -34,7 +34,7 @@ If we wish, we can also use the *search field* located on the top of the toolbar
 
 Now, let's zoom out all the way back and place a marker at the north of Brazil, as shown. To *place* a marker, simply click on the map. If we want to, we can also place multiple markers.
 
-We may also wish to clear all the placed markers. To do that, click on the :guilabel:`|trash-icon|` red button on the left side of the toolbar.
+We may also wish to clear all the placed markers. To do that, click on the |trash-icon| red button on the left side of the toolbar.
 
 .. thumbnail:: https://raw.githubusercontent.com/almeidaxan/bfast-explorer/master/md/images/tutorial-03.jpg
   :group: bfast-explorer
@@ -46,7 +46,7 @@ By selecting a marker, we can now choose a combination of which satellites to do
 .. thumbnail:: https://raw.githubusercontent.com/almeidaxan/bfast-explorer/master/md/images/tutorial-04.jpg
   :group: bfast-explorer
 
-Then, we press the :guilabel:`|download-icon| Get Data` blue button, located on the right side of the toolbar. By pressing that button, the download will start. We can keep track of the download progress by looking to the lower right corner. All the historical data available are downloaded, which should take less than 10 seconds for the three productsselected.
+Then, we press the |download-icon| :guilabel:`Get Data` blue button, located on the right side of the toolbar. By pressing that button, the download will start. We can keep track of the download progress by looking to the lower right corner. All the historical data available are downloaded, which should take less than 10 seconds for the three productsselected.
 
 .. note:: 
     
@@ -56,7 +56,7 @@ Then, we press the :guilabel:`|download-icon| Get Data` blue button, located on 
 .. thumbnail:: https://raw.githubusercontent.com/almeidaxan/bfast-explorer/master/md/images/tutorial-05.jpg
   :group: bfast-explorer
 
-If the download is successful, we'll receive a message directing to the :guilabel:`|chart-icon| Analysis` tab.
+If the download is successful, we'll receive a message directing to the |chart-icon| :guilabel:`Analysis` tab.
 
 Analysis Tab
 ************
@@ -83,12 +83,12 @@ Apart from the spectral bands, there are also four spectral-bands-derived indexe
 .. thumbnail:: https://raw.githubusercontent.com/almeidaxan/bfast-explorer/master/md/images/tutorial-08.jpg
   :group: bfast-explorer
 
-If we want to, we can also download *all* the time series data as a file. To do that, press the :guilabel:`|download-icon| Data` blue button. All the data will be downloaded as a .CSV, ordered by the acquisiton date. Also, an additional column is included, in order to distinguish the satellite sources.
+If we want to, we can also download *all* the time series data as a file. To do that, press the |download-icon| :guilabel:`Data` blue button. All the data will be downloaded as a .CSV, ordered by the acquisiton date. Also, an additional column is included, in order to distinguish the satellite sources.
 
 .. thumbnail:: https://raw.githubusercontent.com/almeidaxan/bfast-explorer/master/md/images/tutorial-09.jpg
   :group: bfast-explorer
 
-We may download the time series plot as an image, by pressing the guilabel:`|download-icon| Plot` blue button. A window will appear offering some raster (.JPEG, .PNG) and a vectorial (.SVG) image output formats.
+We may download the time series plot as an image, by pressing the |download-icon| :guilabel:`Plot` blue button. A window will appear offering some raster (.JPEG, .PNG) and a vectorial (.SVG) image output formats.
 
 .. thumbnail:: https://raw.githubusercontent.com/almeidaxan/bfast-explorer/master/md/images/tutorial-10.jpg
   :group: bfast-explorer
@@ -100,7 +100,7 @@ Next, we select the *change detection algorithm*. Three options are available: *
 
 By selecting **bfastmonitor**, we are able to tweak four parameters on the left side-bar: :code:`formula`, :code:`history period type`, :code:`harmonic order`, and :code:`start of monitoring`. These parameters have different impacts on the results, which can be verified on the right side plot. Here, we set the maximum value of the :code:`harmonic order` to 9 to avoid some problems.
 
-Similar to the time series, we can also download the *results* of the change detection algorithms as .RDS data files, by clicking on the :guilabel:`|download-icon| Results` blue button. If we wish to download the plot, we can press the :guilabel:`|download-icon| Plot` blue button.
+Similar to the time series, we can also download the *results* of the change detection algorithms as .RDS data files, by clicking on the |download-icon| :guilabel:`Results` blue button. If we wish to download the plot, we can press the |download-icon| :guilabel:`Plot` blue button.
 
 For more information on how to load .RDS files on R, please check this `link <http://www.fromthebottomoftheheap.net/2012/04/01/saving-and-loading-r-objects/>`__.
 
