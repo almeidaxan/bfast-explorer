@@ -46,7 +46,7 @@ By selecting a marker, we can now choose a combination of which satellites to do
 .. thumbnail:: https://raw.githubusercontent.com/almeidaxan/bfast-explorer/master/md/images/tutorial-04.jpg
   :group: bfast-explorer
 
-Then, we press the :guilbel:`|download-icon| Get Data` blue button, located on the right side of the toolbar. By pressing that button, the download will start. We can keep track of the download progress by looking to the lower right corner. All the historical data available are downloaded, which should take less than 10 seconds for the three productsselected.
+Then, we press the :guilabel:`|download-icon| Get Data` blue button, located on the right side of the toolbar. By pressing that button, the download will start. We can keep track of the download progress by looking to the lower right corner. All the historical data available are downloaded, which should take less than 10 seconds for the three productsselected.
 
 .. note:: 
     
